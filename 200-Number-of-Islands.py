@@ -6,21 +6,19 @@ class Solution:
         h = len(grid[0])
         v = len(grid)
         islands = 0
-
-        def dfs(x, y):
-            if x<0 or x>=v or y<0 or y>=h or grid[x][y] != '1':
-                return
-            grid[x][y] = \0\
-            dfs(x+1, y)
-            dfs(x-1, y)
-            dfs(x, y+1)
-            dfs(x, y-1)
+        directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
 
         for i in range(v):
             for j in range(h):
                 if grid[i][j] == \1\:
                     islands += 1
-                    dfs(i,j)
-                
+                    queue = deque([(i,j)])
+                    while queue:
+                        x, y = queue.popleft()
+                        if 0<=x<v and 0<=y<h and grid[x][y] == \1\:
+                            grid[x][y] = \0\
+                            for dx, dy in directions:
+                                queue.append([x+dx, y+dy])
+
         return islands
                 
