@@ -1,12 +1,7 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        l = []
-        r = []
+        r = defaultdict(list)
         for i in strs:
-            sortedI = sorted(i)
-            if sortedI in l:
-                r[l.index(sortedI)].append(i)
-            else:
-                r.append([i])
-                l.append(sortedI)
-        return r
+            key = "".join(sorted(i))
+            r[key].append(i)
+        return list(r.values())
