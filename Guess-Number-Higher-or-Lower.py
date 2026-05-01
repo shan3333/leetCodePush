@@ -7,14 +7,14 @@
 7
 8class Solution:
 9    def guessNumber(self, n: int) -> int:
-10        def binaryGuess(left: int, right: int) -> int:
-11            my_guess = (left + right) // 2
-12            check = guess(my_guess)
-13            if check == -1:
-14                return binaryGuess(left, my_guess - 1)
-15            elif check == 0:
-16                return my_guess
-17            else:
-18                return binaryGuess(my_guess + 1, right)
-19        
-20        return binaryGuess(1, n)
+10        left, right = 1, n
+11        while left <= right:
+12            my_guess = (left + right) // 2
+13            check = guess(my_guess)
+14
+15            if check == -1:
+16                right = my_guess - 1
+17            elif check == 1:
+18                left = my_guess + 1
+19            else:
+20                return my_guess
